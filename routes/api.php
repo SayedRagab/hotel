@@ -15,5 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('register',[AuthController::class,'register']);
-Route::post('login',[AuthController::class,'login']);
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
+Route::post('refresh-token', [AuthController::class, 'refresh']);
+
+Route::middleware(['custom.auth:api'])->group(function () {
+    Route::post('logout', [AuthController::class, 'logout']);
+    //**Profile */
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [AuthController::class, 'profile']);
+    });
+});
