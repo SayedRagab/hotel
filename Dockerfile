@@ -1,3 +1,3 @@
-FROM php:8.0-fpm
- 
+FROM ubuntu:20.04
+
 RUN composer update
