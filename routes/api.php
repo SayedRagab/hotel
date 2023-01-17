@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,5 +26,15 @@ Route::middleware(['custom.auth:api'])->group(function () {
     //**Profile */
     Route::prefix('profile')->group(function () {
         Route::get('/', [AuthController::class, 'profile']);
+    });
+    //**Home */
+    Route::prefix('home')->group(function () {
+        Route::get('/', [HomeController::class, 'get']);
+    });
+    //**Home */
+    Route::prefix('booking')->group(function () {
+        Route::get('/', [BookingController::class, 'get']);
+        Route::post('/', [BookingController::class, 'add']);
+        Route::delete('/{id}', [BookingController::class, 'delete']);
     });
 });
